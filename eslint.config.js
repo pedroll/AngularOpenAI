@@ -1,4 +1,4 @@
-// @ts-check
+'use strict';
 
 // Allows us to bring in the recommended core rules from eslint itself
 const eslint = require('@eslint/js');
@@ -14,8 +14,10 @@ const jsdoc = require('eslint-plugin-jsdoc');
 const sonarjs = require('eslint-plugin-sonarjs');
 const jest = require('eslint-plugin-jest');
 const jestDom = require("eslint-plugin-jest-dom");
+const unicorn = require("eslint-plugin-unicorn");
+const globals = require('globals');
+
 // import eslintPluginUnicorn from 'eslint-plugin-unicorn';
-// import globals from 'globals';
 // Export our config array, which is composed together thanks to the typed utility function from typescript-eslint
 module.exports = tseslint.config(
   {
@@ -36,18 +38,26 @@ module.exports = tseslint.config(
       //...rxjs.configs.recommended,
       //"plugin:import/recommended", // The correct way to include the import plugin
       //...importPlugin.configs.recommended,
-      jsdoc.configs["flat/recommended-typescript"],
+      jsdoc.configs['flat/recommended-typescript'],
       sonarjs.configs.recommended,
 
       // 'plugin:rxjs-angular-updated/recommended',
       // Apply the recommended Prettier rules
       eslintPluginPrettierRecommended,
     ],
+    languageOptions: {
+      globals: globals.builtin, // unicorn
+    },
+    plugins: {
+      unicorn: unicorn,
+
+    },
     // Set the custom processor which will allow us to have our inline Component templates extracted
     // and treated as if they are HTML files (and therefore have the .html config below applied to them)
     processor: angular.processInlineTemplates,
     // Override specific rules for TypeScript files (these will take priority over the extended configs above)
     rules: {
+      ...unicorn.configs.all.rules,
       '@angular-eslint/directive-selector': [
         'error',
         {
@@ -65,7 +75,7 @@ module.exports = tseslint.config(
         },
       ],
       // '@angular-eslint/prefer-standalone': 'off',
-      'prettier/prettier': 'warn', // Add this line to silence Prettier errors
+      'prettier': 'warn', // Add this line to silence Prettier errors
     },
   },
   {
@@ -79,20 +89,20 @@ module.exports = tseslint.config(
       ...angular.configs.templateAccessibility,
     ],
     rules: {
-      'prettier/prettier': 'warn', // Add this line to silence Prettier errors
+      'prettier': 'warn', // Add this line to silence Prettier errors
     },
   },
   {
     // update this to match your test files
     files: ['**/*.spec.js', '**/*.test.js'],
     ...jest.configs['flat/all'],
-    ...jestDom.configs["flat/all"],
+    ...jestDom.configs['flat/all'],
     languageOptions: {
       globals: jest.environments.globals.globals,
     },
     rules: {
       ...jest.configs['flat/all'].rules,
-      ...jestDom.configs["flat/all"].rules,
+      ...jestDom.configs['flat/all'].rules,
     },
-  },
+  }
 );
