@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ChatMessageComponent } from '../../components/chat-bubbles/chat-message/chat-message.component';
-import { UserMessageComponent } from '../../components/chat-bubbles/user-message/user-message.component';
+import { ChatMessageComponent, UserMessageComponent } from '@components/index';
 
 @Component({
   selector: 'app-orthography-page',
