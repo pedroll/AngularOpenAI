@@ -10,13 +10,12 @@ const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
 const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
 const ngrx = require('@ngrx/eslint-plugin/v9');
-// const rxjs = require('@smarttools/eslint-plugin-rxjs');
-// const importPlugin = require('eslint-plugin-import');
 const jsdoc = require('eslint-plugin-jsdoc');
 const sonarjs = require('eslint-plugin-sonarjs');
-
-// const preferArrowPlugin = require('eslint-plugin-prefer-arrow');
-//const rxjsAngularPlugin = require('eslint-plugin-rxjs-angular-updated');
+const jest = require('eslint-plugin-jest');
+const jestDom = require("eslint-plugin-jest-dom");
+// import eslintPluginUnicorn from 'eslint-plugin-unicorn';
+// import globals from 'globals';
 // Export our config array, which is composed together thanks to the typed utility function from typescript-eslint
 module.exports = tseslint.config(
   {
@@ -82,5 +81,18 @@ module.exports = tseslint.config(
     rules: {
       'prettier/prettier': 'warn', // Add this line to silence Prettier errors
     },
-  }
+  },
+  {
+    // update this to match your test files
+    files: ['**/*.spec.js', '**/*.test.js'],
+    ...jest.configs['flat/all'],
+    ...jestDom.configs["flat/all"],
+    languageOptions: {
+      globals: jest.environments.globals.globals,
+    },
+    rules: {
+      ...jest.configs['flat/all'].rules,
+      ...jestDom.configs["flat/all"].rules,
+    },
+  },
 );
