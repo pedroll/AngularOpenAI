@@ -50,7 +50,6 @@ module.exports = tseslint.config(
     },
     plugins: {
       unicorn: unicorn,
-
     },
     // Set the custom processor which will allow us to have our inline Component templates extracted
     // and treated as if they are HTML files (and therefore have the .html config below applied to them)
@@ -87,12 +86,7 @@ module.exports = tseslint.config(
       ...angular.configs.templateRecommended,
       // Apply the Angular template rules which focus on accessibility of our apps
       ...angular.configs.templateAccessibility,
-      eslintPluginPrettierRecommended,
-
     ],
-    rules: {
-      'prettier/prettier': 'warn', // Add this line to silence Prettier errors
-    },
   },
   {
     // update this to match your test files
