@@ -75,7 +75,7 @@ module.exports = tseslint.config(
         },
       ],
       // '@angular-eslint/prefer-standalone': 'off',
-      'prettier': 'warn', // Add this line to silence Prettier errors
+      'prettier/prettier': 'warn', // Add this line to silence Prettier errors
     },
   },
   {
@@ -87,9 +87,11 @@ module.exports = tseslint.config(
       ...angular.configs.templateRecommended,
       // Apply the Angular template rules which focus on accessibility of our apps
       ...angular.configs.templateAccessibility,
+      eslintPluginPrettierRecommended,
+
     ],
     rules: {
-      'prettier': 'warn', // Add this line to silence Prettier errors
+      'prettier/prettier': 'warn', // Add this line to silence Prettier errors
     },
   },
   {
