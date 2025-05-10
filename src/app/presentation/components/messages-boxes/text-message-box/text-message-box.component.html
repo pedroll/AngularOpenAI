@@ -1,0 +1,29 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="handleSubmit()"
+  class="flex flex-row h-16 rounded-xl items-center bg-white w-full px-3">
+
+  <div class="flex-grow">
+    <div class="relative w-full">
+
+      <input
+        type="text"
+        class="flex grow w-full border rounded-xl text-gray-800   focus:outline-none focus:border-indigo-300 pl-4 h-10"
+        [placeholder]="placeHolder"
+        formControlName="prompt"
+        [autocomplete]="disableCorrections? 'on' : 'off'"
+        [spellcheck]="disableCorrections ? 'on' : 'off'"
+      >
+
+
+    </div>
+  </div>
+
+  <div class="ml-3">
+    <button class="btn-primary" type="submit" [disabled]="form.invalid">
+      <span class="mr-2">Send</span>
+      <i class="fa-regular fa-paper-plane"></i>
+    </button>
+  </div>
+
+</form>
