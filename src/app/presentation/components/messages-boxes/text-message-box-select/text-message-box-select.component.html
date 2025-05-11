@@ -1,0 +1,35 @@
+<form
+  (ngSubmit)="handleSubmit()"
+  [formGroup]="formGroup"
+  class="flex flex-row h-16 rounded-xl items-center bg-white w-full px-3">
+
+  <div class="flex-grow">
+    <div class="flex">
+
+      <input
+        [placeholder]="placeHolder"
+        class="flex grow w-full border rounded-xl text-gray-800   focus:outline-none focus:border-indigo-300 pl-4 h-10"
+        formControlName="prompt"
+        type="text"
+      >
+      <select
+        formControlName="selectedOption"
+        class="w-2/5 ml-5 border rounded-xl text-gray-800 focus:outline-none focus:border-indigo-300 pl-4 h-10">
+        <option value="">Select...</option>
+        @for (option of options; track option.label) {
+          <option [value]="option.value">{{ option.label }}</option>
+        }
+      </select>
+
+
+    </div>
+  </div>
+
+  <div class="ml-3">
+    <button [disabled]="formGroup.invalid" class="btn-primary" type="submit">
+      <span class="mr-2">Send</span>
+      <i class="fa-regular fa-paper-plane"></i>
+    </button>
+  </div>
+
+</form>

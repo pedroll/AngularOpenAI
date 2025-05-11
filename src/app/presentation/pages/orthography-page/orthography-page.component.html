@@ -21,8 +21,16 @@
   <!--    placeHolder="Escribe tu mensaje"-->
   <!--  (messageBox)="handleMessage($event)"-->
   <!--  />-->
-  <app-text-message-box-file
+
+  <!--  <app-text-message-box-file-->
+  <!--    placeHolder="Escribe tu mensaje"-->
+  <!--    (messageBox)="handleMessageWithFile($event)"-->
+  <!--  />-->
+
+  <app-text-message-box-select
     placeHolder="Escribe tu mensaje"
-    (messageBox)="handleMessageWithFile($event)" />
+    [options]="[{label: '1', value: '1'},{label: '2', value: '2'}]"
+    (messageBox)="handleMessageWithSelect($event)"
+  />
 
 </div>

@@ -7,28 +7,35 @@ import {
   Validators,
 } from '@angular/forms';
 
-export interface TextMessageFileEvent {
-  file: File;
+interface Option {
+  label: string;
+  value: string;
+}
+
+export interface TextMessageSelectEvent {
+  selectedOption: string;
   prompt?: string | null;
 }
 
 @Component({
-  selector: 'app-text-message-box-file',
+  selector: 'app-text-message-box-select',
   imports: [ReactiveFormsModule],
-  templateUrl: './text-message-box-file.component.html',
+  templateUrl: './text-message-box-select.component.html',
+  styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TextMessageBoxFileComponent {
+export class TextMessageBoxSelectComponent {
   @Input() public placeHolder = '';
+  @Input({ required: true }) public options!: Option[];
 
-  @Output() public messageBox = new EventEmitter<TextMessageFileEvent>();
+  @Output() public messageBox = new EventEmitter<TextMessageSelectEvent>();
   formGroup: FormGroup;
   public file: File | undefined;
 
   constructor(private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({
-      file: new FormControl<File | undefined>(undefined, Validators.required),
-      prompt: new FormControl<string | undefined>(undefined),
+      prompt: new FormControl<string | undefined>(undefined, Validators.required),
+      selectedOption: new FormControl<string | undefined>('', Validators.required),
     });
   }
 
@@ -43,9 +50,9 @@ export class TextMessageBoxFileComponent {
   handleSubmit() {
     if (this.formGroup.invalid) return;
 
-    const { prompt, file } = this.formGroup.value;
+    const { prompt, selectedOption } = this.formGroup.value;
 
-    this.messageBox.emit({ prompt, file: file! });
+    this.messageBox.emit({ prompt, selectedOption: selectedOption });
     this.formGroup.reset();
   }
 }

@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   ChatMessageComponent,
-  TextMessageBoxFileComponent,
-  TextMessageEvent,
+  TextMessageBoxSelectComponent,
+  TextMessageFileEvent,
+  TextMessageSelectEvent,
   TypingLoaderComponent,
   UserMessageComponent,
 } from '@components/index';
@@ -14,7 +15,7 @@ import {
     UserMessageComponent,
     TypingLoaderComponent,
     // TextMessageBoxComponent,
-    TextMessageBoxFileComponent,
+    TextMessageBoxSelectComponent,
   ],
   templateUrl: './orthography-page.component.html',
   styles: ``,
@@ -25,7 +26,11 @@ export class OrthographyPageComponent {
     console.log(prompt);
   }
 
-  handleMessageWithFile({ prompt, file }: TextMessageEvent): void {
+  handleMessageWithFile({ prompt, file }: TextMessageFileEvent): void {
     console.log({ prompt, file });
+  }
+
+  handleMessageWithSelect({ prompt, selectedOption }: TextMessageSelectEvent): void {
+    console.log({ prompt, selectedOption });
   }
 }
