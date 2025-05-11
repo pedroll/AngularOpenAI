@@ -4,15 +4,18 @@
     <div class="grid gap-y-1">
 
       <!--      chat messages.   -->
-      <app-chat-message
-        text="Escribe el texto a revisar"
-      />
+      <app-chat-message text="Write tour text to revieew" />
+      @for (message of messages(); track message.isGpt) {
+        @if (message.isGpt) {
+          <app-chat-message [text]="message.text" />
+        } @else {
+          <app-user-message [text]="message.text" />
+        }
+      }
 
-      <app-user-message
-        text="Escribe tu mensaje"
-      />
-
-      <app-typing-loader />
+      @if (isLoading()) {
+        <app-typing-loader />
+      }
 
     </div>
   </div>
@@ -28,9 +31,9 @@
   <!--  />-->
 
   <app-text-message-box-select
-    placeHolder="Escribe tu mensaje"
-    [options]="[{label: '1', value: '1'},{label: '2', value: '2'}]"
     (messageBox)="handleMessageWithSelect($event)"
+    [options]="[{label: 'UNO', value: '1'},{label: 'DOS', value: '2'}]"
+    placeHolder="Escribe tu mensaje"
   />
 
 </div>
