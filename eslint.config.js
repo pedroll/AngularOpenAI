@@ -13,8 +13,8 @@ const ngrx = require('@ngrx/eslint-plugin/v9');
 const jsdoc = require('eslint-plugin-jsdoc');
 const sonarjs = require('eslint-plugin-sonarjs');
 const jest = require('eslint-plugin-jest');
-const jestDom = require("eslint-plugin-jest-dom");
-const unicorn = require("eslint-plugin-unicorn");
+const jestDom = require('eslint-plugin-jest-dom');
+const unicorn = require('eslint-plugin-unicorn');
 const globals = require('globals');
 
 // import eslintPluginUnicorn from 'eslint-plugin-unicorn';
@@ -31,6 +31,7 @@ module.exports = tseslint.config(
       // Optionally apply stylistic rules from typescript-eslint that improve code consistency
       ...tseslint.configs.stylistic,
       // Apply the recommended Angular rules
+      sonarjs.configs.recommended,
       ...angular.configs.tsRecommended,
       ...ngrx.configs.all,
       // Add RxJS recommended config
@@ -39,7 +40,6 @@ module.exports = tseslint.config(
       //"plugin:import/recommended", // The correct way to include the import plugin
       //...importPlugin.configs.recommended,
       jsdoc.configs['flat/recommended-typescript'],
-      sonarjs.configs.recommended,
 
       // 'plugin:rxjs-angular-updated/recommended',
       // Apply the recommended Prettier rules
@@ -57,6 +57,8 @@ module.exports = tseslint.config(
     // Override specific rules for TypeScript files (these will take priority over the extended configs above)
     rules: {
       ...unicorn.configs.all.rules,
+      '@typescript-eslint/no-unused-vars': 'off',
+      'sonarjs/unused-import': 'off',
       '@angular-eslint/directive-selector': [
         'error',
         {
