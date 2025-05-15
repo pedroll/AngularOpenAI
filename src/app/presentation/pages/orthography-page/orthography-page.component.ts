@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import {
   ChatMessageComponent,
-  TextMessageBoxSelectComponent,
-  TextMessageSelectEvent,
+  TextMessageBoxComponent,
   TypingLoaderComponent,
   UserMessageComponent,
 } from '@components/index';
@@ -15,27 +14,28 @@ import { OpenaiService } from '../../services/openai.service';
     ChatMessageComponent,
     UserMessageComponent,
     TypingLoaderComponent,
-    // TextMessageBoxComponent,
-    TextMessageBoxSelectComponent,
+    TextMessageBoxComponent,
   ],
   templateUrl: './orthography-page.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrthographyPageComponent {
-  public messages = signal<Message[]>([{ text: 'Sample message', isGpt: false }]);
+  public messages = signal<Message[]>([]);
   public isLoading = signal(false);
   public openaiService = inject(OpenaiService);
 
-  // handleMessage(prompt: string): void {
-  //   console.log(prompt);
-  // }
-  //
-  // handleMessageWithFile({ prompt, file }: TextMessageFileEvent): void {
-  //   console.log({ prompt, file });
-  // }
+  handleMessage(prompt: string): void {
+    console.log(prompt);
+    this.isLoading.set(true);
+    this.messages.update(messages => [...messages, { text: prompt, isGpt: false }]);
 
-  handleMessageWithSelect({ prompt, selectedOption }: TextMessageSelectEvent): void {
-    console.log({ prompt, selectedOption });
+    this.openaiService.checkOrthography(prompt).subscribe(response => {
+      this.isLoading.set(false);
+      this.messages.update(messages => [
+        ...messages,
+        { text: response.message, isGpt: true, info: response },
+      ]);
+    });
   }
 }

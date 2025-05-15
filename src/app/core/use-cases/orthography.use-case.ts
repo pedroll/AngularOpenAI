@@ -1,13 +1,16 @@
 import { environment } from '../../../environments/environment';
-import { OrthographyResponse } from '@interfaces/index';
+import type { OrthographyResponse } from '@interfaces/index';
 
-export const orthographyUseCase = async (opepromt: string) => {
+export const orthographyUseCase = async (prompt: string) => {
   try {
     const response = await fetch(`${environment.backendApi}/orthography-check`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        prompt,
+      }),
     });
 
     if (!response.ok) throw new Error('No se pudo realizar la corrección.');

@@ -20,20 +20,10 @@
     </div>
   </div>
   <!--    chat box -->
-  <!--    <app-text-message-box-->
-  <!--      placeHolder="Escribe tu mensaje"-->
-  <!--    (messageBox)="handleMessage($event)"-->
-  <!--    />-->
-
-  <!--  <app-text-message-box-file-->
-  <!--    placeHolder="Escribe tu mensaje"-->
-  <!--    (messageBox)="handleMessageWithFile($event)"-->
-  <!--  />-->
-
-  <app-text-message-box-select
-    (messageBox)="handleMessageWithSelect($event)"
-    [options]="[{label: 'UNO', value: '1'},{label: 'DOS', value: '2'}]"
+  <app-text-message-box
     placeHolder="Escribe tu mensaje"
+    (messageBox)="handleMessage($event)"
   />
+
 
 </div>
