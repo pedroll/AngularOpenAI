@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import {
   ChatMessageComponent,
+  ChatMessageOrthographyComponent,
   TextMessageBoxComponent,
   TypingLoaderComponent,
   UserMessageComponent,
@@ -15,6 +16,7 @@ import { OpenaiService } from '../../services/openai.service';
     UserMessageComponent,
     TypingLoaderComponent,
     TextMessageBoxComponent,
+    ChatMessageOrthographyComponent,
   ],
   templateUrl: './orthography-page.component.html',
   styles: ``,

@@ -7,7 +7,10 @@
       <app-chat-message text="Write tour text to revieew" />
       @for (message of messages(); track message.isGpt) {
         @if (message.isGpt) {
-          <app-chat-message [text]="message.text" />
+          <app-chat-message-orthography
+            [text]="message.text"
+            [userScore]="message.info!.userScore"
+            [errors]="message.info!.errors" />
         } @else {
           <app-user-message [text]="message.text" />
         }
@@ -21,8 +24,8 @@
   </div>
   <!--    chat box -->
   <app-text-message-box
-    placeHolder="Escribe tu mensaje"
     (messageBox)="handleMessage($event)"
+    placeHolder="Escribe tu mensaje"
   />
 
 
