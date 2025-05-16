@@ -25,8 +25,13 @@ export class ProsConsStreamPageComponent {
   public messages = signal<Message[]>([]);
   public isLoading = signal(false);
   public openaiService = inject(OpenaiService);
+  public abortSignal = new AbortController();
 
   async handleMessage(prompt: string) {
+    // stop the previous stream
+    this.abortSignal.abort();
+    this.abortSignal = new AbortController();
+
     console.log(prompt);
     this.messages.update(messages => [
       ...messages,
@@ -35,12 +40,11 @@ export class ProsConsStreamPageComponent {
     ]);
 
     this.isLoading.set(true);
-    const stream = this.openaiService.prosConsDiscusserStream(prompt);
+    const stream = this.openaiService.prosConsDiscusserStream(prompt, this.abortSignal.signal);
     this.isLoading.set(false);
 
     for await (const chunk of stream) {
       console.log(chunk);
-      // this.messages.update(messages => [...messages, { text: chunk, isGpt: true }]);
       this.handleStreamResponse(chunk);
     }
   }

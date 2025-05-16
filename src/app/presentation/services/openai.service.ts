@@ -17,7 +17,7 @@ export class OpenaiService {
     return from(prosConsUseCase(prompt));
   }
 
-  prosConsDiscusserStream(prompt: string) {
-    return prosConsStreamUseCase(prompt);
+  prosConsDiscusserStream(prompt: string, abortSignal: AbortSignal) {
+    return prosConsStreamUseCase(prompt, abortSignal);
   }
 }

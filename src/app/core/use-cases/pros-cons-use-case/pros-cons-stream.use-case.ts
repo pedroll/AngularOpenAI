@@ -3,8 +3,9 @@ import { environment } from '../../../../environments/environment';
 /**
  *
  * @param prompt
+ * @param abortSignal
  */
-export async function* prosConsStreamUseCase(prompt: string) {
+export async function* prosConsStreamUseCase(prompt: string, abortSignal: AbortSignal) {
   try {
     const response = await fetch(`${environment.backendApi}/pros-cons-discusser-stream`, {
       method: 'POST',
@@ -14,6 +15,7 @@ export async function* prosConsStreamUseCase(prompt: string) {
       body: JSON.stringify({
         prompt,
       }),
+      signal: abortSignal,
     });
 
     if (!response.ok) throw new Error('No se pudo realizar la comparación.');
