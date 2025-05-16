@@ -38,12 +38,4 @@ export class ProsConsPageComponent {
       this.messages.update(messages => [...messages, { text: response.content, isGpt: true }]);
     });
   }
-
-  // handleMessageWithFile({ prompt, file }: TextMessageFileEvent): void {
-  //   console.log({ prompt, file });
-  // }
-  //
-  // handleMessageWithSelect({ prompt, selectedOption }: TextMessageSelectEvent): void {
-  //   console.log({ prompt, selectedOption });
-  // }
 }
