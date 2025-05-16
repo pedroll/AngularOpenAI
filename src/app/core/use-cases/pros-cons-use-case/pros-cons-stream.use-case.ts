@@ -1,6 +1,10 @@
 import { environment } from '../../../../environments/environment';
 
-export const prosConsStreamUseCase = async (prompt: string) => {
+/**
+ *
+ * @param prompt
+ */
+export async function* prosConsStreamUseCase(prompt: string) {
   try {
     const response = await fetch(`${environment.backendApi}/pros-cons-discusser-stream`, {
       method: 'POST',
@@ -22,22 +26,23 @@ export const prosConsStreamUseCase = async (prompt: string) => {
 
     const decoder = new TextDecoder();
     let text = '';
-    const done = false;
 
-    while (!done) {
+    while (true) {
       const { value, done } = await reader.read();
-      text += decoder.decode(value);
-      console.log(text);
+      console.log({ text });
 
-      // Aquí puedes hacer lo que quieras con el chunk de datos
+      if (done) {
+        break;
+      }
+      const decodeChunk = decoder.decode(value, { stream: true });
+      text += decodeChunk;
+      console.log({ text: text || decodeChunk }); // utiliza decodeChunk si text es undefined
 
-      // Por ejemplo, si quieres actualizar el estado de tu componente con el chunk de datos
-      // this.setState(prevState => ({
-      //   data: prevState.data + chunk
-      // }));
-      return;
+      yield text;
     }
-  } catch {
-    return;
+    return text;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
-};
+}

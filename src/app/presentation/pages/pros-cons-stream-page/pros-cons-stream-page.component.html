@@ -5,7 +5,7 @@
 
       <!--      chat messages.   -->
       <app-chat-message text="What would you compare? -stream" />
-      @for (message of messages(); track message.isGpt) {
+      @for (message of messages(); track $index) {
         @if (message.isGpt) {
           <app-chat-message [text]="message.text" />
         } @else {

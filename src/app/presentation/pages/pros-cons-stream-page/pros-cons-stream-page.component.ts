@@ -26,11 +26,16 @@ export class ProsConsStreamPageComponent {
   public isLoading = signal(false);
   public openaiService = inject(OpenaiService);
 
-  async andleMessage(prompt: string): void {
+  async handleMessage(prompt: string) {
     console.log(prompt);
     this.isLoading.set(true);
     this.messages.update(messages => [...messages, { text: prompt, isGpt: false }]);
 
-    await this.openaiService.prosConsDiscusserStream(prompt);
+    const stream = this.openaiService.prosConsDiscusserStream(prompt);
+
+    for await (const chunk of stream) {
+      console.log(chunk);
+      this.messages.update(messages => [...messages, { text: chunk, isGpt: true }]);
+    }
   }
 }
