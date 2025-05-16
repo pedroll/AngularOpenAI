@@ -28,14 +28,28 @@ export class ProsConsStreamPageComponent {
 
   async handleMessage(prompt: string) {
     console.log(prompt);
-    this.isLoading.set(true);
-    this.messages.update(messages => [...messages, { text: prompt, isGpt: false }]);
+    this.messages.update(messages => [
+      ...messages,
+      { text: prompt, isGpt: false },
+      { text: '...', isGpt: true },
+    ]);
 
+    this.isLoading.set(true);
     const stream = this.openaiService.prosConsDiscusserStream(prompt);
+    this.isLoading.set(false);
 
     for await (const chunk of stream) {
       console.log(chunk);
-      this.messages.update(messages => [...messages, { text: chunk, isGpt: true }]);
+      // this.messages.update(messages => [...messages, { text: chunk, isGpt: true }]);
+      this.handleStreamResponse(chunk);
     }
+  }
+
+  handleStreamResponse(message: string) {
+    this.messages().pop();
+    this.isLoading.set(false);
+    // this.messages.update(messages => [...messages, { text: message, isGpt: true }]);
+    const messages = this.messages();
+    this.messages.set([...messages, { text: message, isGpt: true }]);
   }
 }
