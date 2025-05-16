@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
-import { orthographyUseCase } from '@use-cases/index';
-import { OrthographyResponse } from '@interfaces/orthography-response.interface';
+import { orthographyUseCase, prosConsUseCase } from '@use-cases/index';
+import { OrthographyResponse, ProsConsResponse } from '@interfaces/index';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OpenaiService {
-  constructor() {
-    // todo: openAI
-  }
-
   checkOrthography(prompt: string): Observable<OrthographyResponse> {
     // transform promise into observable
     return from(orthographyUseCase(prompt));
+  }
+
+  prosConsDiscusser(prompt: string): Observable<ProsConsResponse> {
+    // transform promise into observable
+    return from(prosConsUseCase(prompt));
   }
 }
