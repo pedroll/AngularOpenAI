@@ -1,4 +1,4 @@
-import { OrthographyResponse } from '@interfaces/orthography-response.interface';
+import { OrthographyResponse } from '@interfaces/index';
 
 export interface Message {
   text: string;
