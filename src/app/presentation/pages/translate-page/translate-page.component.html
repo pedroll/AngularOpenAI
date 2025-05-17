@@ -22,8 +22,8 @@
   </div>
   <!--    chat box -->
   <app-text-message-box-select
-    (messageBox)="handleMessageWithSelect($event)"
-    [options]="[{label: 'UNO', value: '1'},{label: 'DOS', value: '2'}]"
+    (selectedTheLang)="handleMessageWithSelect($event)"
+    [options]="languages()"
     placeHolder="Escribe tu mensaje"
   />
 

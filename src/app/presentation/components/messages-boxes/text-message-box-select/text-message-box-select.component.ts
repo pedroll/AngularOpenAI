@@ -8,8 +8,8 @@ import {
 } from '@angular/forms';
 
 interface Option {
-  label: string;
-  value: string;
+  text: string;
+  id: string;
 }
 
 export interface TextMessageSelectEvent {
@@ -28,7 +28,7 @@ export class TextMessageBoxSelectComponent {
   @Input() public placeHolder = '';
   @Input({ required: true }) public options!: Option[];
 
-  @Output() public messageBox = new EventEmitter<TextMessageSelectEvent>();
+  @Output() public selectedTheLang = new EventEmitter<TextMessageSelectEvent>();
   formGroup: FormGroup;
   public file: File | undefined;
 
@@ -39,20 +39,21 @@ export class TextMessageBoxSelectComponent {
     });
   }
 
-  handleSelectedFile(event: Event) {
-    const file = (event.target as HTMLInputElement).files?.[0];
-    console.log(file);
-    if (file) {
-      this.formGroup.controls['file'].setValue(file);
-    }
-  }
+  // handleSelectedFile(event: Event) {
+  //   const file = (event.target as HTMLInputElement).files?.[0];
+  //   console.log(file);
+  //   if (file) {
+  //     this.formGroup.controls['file'].setValue(file);
+  //   }
+  // }
 
   handleSubmit() {
     if (this.formGroup.invalid) return;
 
     const { prompt, selectedOption } = this.formGroup.value;
 
-    this.messageBox.emit({ prompt, selectedOption: selectedOption });
+    this.selectedTheLang.emit({ prompt, selectedOption: selectedOption });
     this.formGroup.reset();
+    this.formGroup.controls['selectedOption'].setValue('');
   }
 }
