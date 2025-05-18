@@ -8,12 +8,14 @@ import {
 } from '@components/index';
 import { Message } from '@interfaces/index';
 import { OpenaiService } from '../../services/openai.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-orthography-page',
   imports: [
     ChatMessageComponent,
     UserMessageComponent,
+    ReactiveFormsModule,
     TypingLoaderComponent,
     TextMessageBoxComponent,
     ChatMessageOrthographyComponent,

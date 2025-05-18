@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
-import { orthographyUseCase, prosConsStreamUseCase, prosConsUseCase } from '@use-cases/index';
+import {
+  orthographyUseCase,
+  prosConsStreamUseCase,
+  prosConsUseCase,
+  textToAudioUseCase,
+  translateTextUseCase,
+} from '@use-cases/index';
 import { OrthographyResponse, ProsConsResponse, TranslateResponse } from '@interfaces/index';
-import { translateTextUseCase } from '@use-cases/translate-use-case/translate-text.use-case';
 
 @Injectable({
   providedIn: 'root',
@@ -24,5 +29,9 @@ export class OpenaiService {
 
   translate(prompt: string, lang: string): Observable<TranslateResponse> {
     return from(translateTextUseCase(prompt, lang));
+  }
+
+  textToAudio(prompt: string, voice: string): Observable<TranslateResponse> {
+    return from(textToAudioUseCase(prompt, voice));
   }
 }
