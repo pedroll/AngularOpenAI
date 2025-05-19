@@ -31,7 +31,7 @@ export class OpenaiService {
     return from(translateTextUseCase(prompt, lang));
   }
 
-  textToAudio(prompt: string, voice: string): Observable<TranslateResponse> {
+  textToAudio(prompt: string, voice: string) {
     return from(textToAudioUseCase(prompt, voice));
   }
 }

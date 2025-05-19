@@ -14,7 +14,7 @@ interface Option {
 
 export interface TextMessageSelectEvent {
   selectedOption: string;
-  prompt?: string | null;
+  prompt: string;
 }
 
 @Component({
@@ -25,16 +25,16 @@ export interface TextMessageSelectEvent {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextMessageBoxSelectComponent {
-  @Input() public placeHolder = '';
+  @Input() public placeHolder?: string;
   @Input({ required: true }) public options!: Option[];
 
-  @Output() public selectedTheLang = new EventEmitter<TextMessageSelectEvent>();
+  @Output() public selectedTheOption = new EventEmitter<TextMessageSelectEvent>();
   formGroup: FormGroup;
   public file: File | undefined;
 
   constructor(private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({
-      prompt: new FormControl<string | undefined>(undefined, Validators.required),
+      prompt: new FormControl<string | undefined>('', Validators.required),
       selectedOption: new FormControl<string | undefined>('', Validators.required),
     });
   }
@@ -52,7 +52,7 @@ export class TextMessageBoxSelectComponent {
 
     const { prompt, selectedOption } = this.formGroup.value;
 
-    this.selectedTheLang.emit({ prompt, selectedOption: selectedOption });
+    this.selectedTheOption.emit({ prompt, selectedOption: selectedOption });
     this.formGroup.reset();
     this.formGroup.controls['selectedOption'].setValue('');
   }

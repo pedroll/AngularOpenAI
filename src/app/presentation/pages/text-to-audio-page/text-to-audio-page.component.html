@@ -7,7 +7,10 @@
       <app-chat-message text="Write tour text to revieew" />
       @for (message of messages(); track message.isGpt) {
         @if (message.isGpt) {
-          <app-chat-message [text]="message.text" />
+          <app-chat-message
+            [text]="message.text"
+            [audioUrl]="message.audioUrl"
+          />
         } @else {
           <app-user-message [text]="message.text" />
         }
@@ -23,8 +26,8 @@
 
 
   <app-text-message-box-select
-    (selectedTheLang)="handleMessageWithSelect($event)"
-    [options]="[]"
+    (selectedTheOption)="handleMessageWithSelect($event)"
+    [options]="voices()"
     placeHolder="Escribe tu mensaje"
   />
 
