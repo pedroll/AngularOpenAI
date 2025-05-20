@@ -34,10 +34,10 @@ export class TextMessageBoxFileComponent {
 
   handleSelectedFile(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
-    console.log(file);
     if (file) {
       this.formGroup.controls['file'].setValue(file);
     }
+    console.log(this.formGroup.value);
   }
 
   handleSubmit() {
