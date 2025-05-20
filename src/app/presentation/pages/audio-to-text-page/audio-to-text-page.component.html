@@ -4,7 +4,7 @@
     <div class="grid gap-y-1">
 
       <!--      chat messages.   -->
-      <app-chat-message text="Write tour text to revieew" />
+      <app-chat-message text="Send your audio to transcribe it:" />
       @for (message of messages(); track message.isGpt) {
         @if (message.isGpt) {
           <app-chat-message [text]="message.text" />

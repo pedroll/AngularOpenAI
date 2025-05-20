@@ -1,12 +1,14 @@
 import { environment } from '../../../../environments/environment';
 import { AudioToTextResponse } from '@interfaces/index';
 
-export const audioToTextUseCase = async (audio: string, prompt?: string) => {
+export const audioToTextUseCase = async (audio: File, prompt?: string) => {
   try {
+    console.log(audio);
+    console.log(prompt);
     const formdata = new FormData();
     if (prompt) formdata.append('prompt', prompt);
     formdata.append('audio', audio);
-
+    console.log(formdata);
     const response = await fetch(`${environment.backendApi}/audio-to-text`, {
       method: 'POST',
 
@@ -16,15 +18,9 @@ export const audioToTextUseCase = async (audio: string, prompt?: string) => {
     if (!response.ok) throw new Error('Text cant be generated.');
     console.log(response);
     const data = (await response.json()) as AudioToTextResponse;
-    return {
-      ok: true,
-      message: prompt,
-      info: data,
-    };
+
+    return data;
   } catch {
-    return {
-      ok: false,
-      message: 'text cant be generated.',
-    };
+    return;
   }
 };
