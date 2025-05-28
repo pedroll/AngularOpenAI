@@ -31,6 +31,19 @@ export class ChatTemplateComponent {
     console.log(prompt);
   }
 
+  // handleMessage(prompt: string): void {
+  //   console.log(prompt);
+  //   this.isLoading.set(true);
+  //   this.messages.update(messages => [...messages, { text: prompt, isGpt: false }]);
+  //
+  //   this.openaiService.checkOrthography(prompt).subscribe(response => {
+  //     this.isLoading.set(false);
+  //     this.messages.update(messages => [
+  //       ...messages,
+  //       { text: response.message, isGpt: true, info: response },
+  //     ]);
+  //   });
+  // }
   // handleMessageWithFile({ prompt, file }: TextMessageFileEvent): void {
   //   console.log({ prompt, file });
   // }
