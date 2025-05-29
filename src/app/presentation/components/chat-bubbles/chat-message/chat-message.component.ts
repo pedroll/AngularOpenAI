@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MarkdownComponent } from 'ngx-markdown';
+import type { ImageGeneratedResponse } from '../../../../interfaces/index';
 
 @Component({
   selector: 'app-chat-message',
@@ -11,4 +12,5 @@ import { MarkdownComponent } from 'ngx-markdown';
 export class ChatMessageComponent {
   @Input({ required: true }) text!: string;
   @Input() audioUrl?: string;
+  @Input() imageInfo?: ImageGeneratedResponse;
 }

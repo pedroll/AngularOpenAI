@@ -1,22 +1,10 @@
 import { environment } from '../../../../environments/environment';
-import type { ImageGenerationResponse } from '@interfaces/index';
+import type { ApiImageGenerationResponse } from '@interfaces/index';
+import { ImageGeneratedResponse, ImageGenerationParameters } from '@interfaces/index';
 
-export interface ImageGenerationParameters {
-  prompt: string;
-  originalImage: string;
-  maskImage: string;
-}
-
-interface Image {
-  ok: boolean;
-  url: string;
-  alt: string;
-}
-
-type ImageGenerated = Image | void;
 export const imageGenerationUseCase = async (
   parameters: ImageGenerationParameters
-): Promise<ImageGenerated> => {
+): Promise<ImageGeneratedResponse> => {
   try {
     const { prompt, originalImage, maskImage } = parameters;
 
@@ -34,7 +22,7 @@ export const imageGenerationUseCase = async (
 
     if (!response.ok) throw new Error('No se pudo realizar la corrección.');
 
-    const data = (await response.json()) as ImageGenerationResponse;
+    const data = (await response.json()) as ApiImageGenerationResponse;
 
     return {
       ok: true,

@@ -5,10 +5,10 @@
 
       <!--      chat messages.   -->
       <app-chat-message text="What do you want to generate?" />
+      @for (message of messages(); track $index) {
 
-      @for (message of messages(); track message.isGpt) {
         @if (message.isGpt) {
-          <app-chat-message [text]="message.text" />
+          <app-chat-message [text]="message.text" [imageInfo]="message.imageInfo" />
         } @else {
           <app-user-message [text]="message.text" />
         }

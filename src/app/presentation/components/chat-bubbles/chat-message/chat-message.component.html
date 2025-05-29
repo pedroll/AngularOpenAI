@@ -15,6 +15,14 @@
           autoplay
           class="w-full"
         ></audio>
+
+      }
+      @if (imageInfo) {
+        <img
+          [src]="imageInfo.url"
+          [alt]="imageInfo.alt"
+          class="w-96 h-96 rounded-lg object-cover"
+        />
       }
     </div>
 

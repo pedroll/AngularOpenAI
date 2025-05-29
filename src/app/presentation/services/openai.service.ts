@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import {
   audioToTextUseCase,
-  ImageGenerationParameters,
   imageGenerationUseCase,
   orthographyUseCase,
   prosConsStreamUseCase,
@@ -10,7 +9,12 @@ import {
   textToAudioUseCase,
   translateTextUseCase,
 } from '@use-cases/index';
-import { OrthographyResponse, ProsConsResponse, TranslateResponse } from '@interfaces/index';
+import {
+  ImageGenerationParameters,
+  OrthographyResponse,
+  ProsConsResponse,
+  TranslateResponse,
+} from '@interfaces/index';
 
 @Injectable({
   providedIn: 'root',
