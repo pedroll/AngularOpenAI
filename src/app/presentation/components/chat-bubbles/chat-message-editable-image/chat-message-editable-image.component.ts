@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 
 import { MarkdownComponent } from 'ngx-markdown';
 
-import { ImageInfo } from '@interfaces/index';
+import { ImageGeneratedInfo } from '@interfaces/index';
 
 @Component({
   selector: 'app-chat-message-editable-image',
@@ -13,7 +13,7 @@ import { ImageInfo } from '@interfaces/index';
 })
 export class ChatMessageEditableImageComponent {
   @Input({ required: true }) text!: string;
-  @Input({ required: true }) imageInfo!: ImageInfo;
+  @Input({ required: true }) imageInfo!: ImageGeneratedInfo;
 
   @Output() selectedImage = new EventEmitter<string>();
 

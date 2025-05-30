@@ -68,7 +68,7 @@ export class ImageTunningPageComponent {
       if (!response) return;
       this.messages.update(messages => [
         ...messages,
-        { text: response.alt ?? '', isGpt: true, imageInfo: response },
+        { text: 'Image variation generated', isGpt: true, imageInfo: response },
       ]);
       console.log(response);
     });

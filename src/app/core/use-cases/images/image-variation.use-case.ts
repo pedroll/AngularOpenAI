@@ -25,7 +25,7 @@ export const imageVariationUseCase = async (
     return {
       ok: true,
       url: data.url,
-      alt: data.openaiUrl,
+      openaiUrl: data.openaiUrl,
     };
   } catch {
     return;
