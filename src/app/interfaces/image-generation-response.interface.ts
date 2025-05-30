@@ -9,10 +9,22 @@ export interface ImageGenerationParameters {
   maskImage?: string;
 }
 
-export interface Image {
+export interface ImageInfo {
   ok: boolean;
   url: string;
   alt: string;
 }
 
-export type ImageGeneratedResponse = Image | void;
+export type ImageGeneratedResponse = ImageInfo | void;
+
+// image variation
+export interface ImageVariationParameters {
+  imageUrl: string;
+}
+
+export interface ApiImageVariationResponse {
+  url: string;
+  openaiUrl: string;
+}
+
+export type ImageVariationResponse = ImageInfo | void;
