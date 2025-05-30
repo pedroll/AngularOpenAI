@@ -28,7 +28,7 @@ import { Message } from '@interfaces/message.interface';
 })
 export class ImageTunningPageComponent {
   public messages = signal<Message[]>([
-    // for testing purposes
+    //for testing purposes
     {
       isGpt: true,
       text: 'Dummy Image',
@@ -44,6 +44,8 @@ export class ImageTunningPageComponent {
   public openaiService = inject(OpenaiService);
 
   handleMessage(prompt: string): void {
+    if (this.isLoading()) return;
+
     console.log(prompt);
     this.isLoading.set(true);
     this.messages.update(messages => [...messages, { text: prompt, isGpt: false }]);
@@ -58,18 +60,23 @@ export class ImageTunningPageComponent {
     });
   }
 
-  // handleMessageWithFile({ prompt, file }: TextMessageFileEvent): void {
-  //   console.log({ prompt, file });
-  // }
-  //
-  // handleMessageWithSelect({ prompt, selectedOption }: TextMessageSelectEvent): void {
-  //   console.log({ prompt, selectedOption });
-  // }
-  generateVariation(): void {}
+  generateVariation(): void {
+    if (!this.originalImage() || this.isLoading()) return;
+    this.isLoading.set(true);
+    this.openaiService.imageVariation(this.originalImage()!).subscribe(response => {
+      this.isLoading.set(false);
+      if (!response) return;
+      this.messages.update(messages => [
+        ...messages,
+        { text: response.alt ?? '', isGpt: true, imageInfo: response },
+      ]);
+      console.log(response);
+    });
+  }
 
-  handleImageChange(newimage: string, originalImage: string): void {
-    this.originalImage.set(originalImage);
+  handleImageChange(newimage: string, image: string): void {
+    this.originalImage.set(image);
     // todo: mask
-    console.log({ newimage, imageUrl: originalImage });
+    console.log({ newimage, imageUrl: image });
   }
 }

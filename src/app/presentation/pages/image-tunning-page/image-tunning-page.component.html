@@ -10,6 +10,7 @@
       class="btn-primary mt-2">
       Generate variation
     </button>
+
   </div>
 }
 
@@ -28,7 +29,6 @@
             [text]="message.text"
             [imageInfo]="message.imageInfo!"
             (selectedImage)="handleImageChange($event, message.imageInfo!.url)" />
-          <app-chat-message [text]="message.text" [imageInfo]="message.imageInfo" />
         } @else {
           <app-user-message [text]="message.text" />
         }

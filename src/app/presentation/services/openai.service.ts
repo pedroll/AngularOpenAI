@@ -3,6 +3,7 @@ import { from, Observable } from 'rxjs';
 import {
   audioToTextUseCase,
   imageGenerationUseCase,
+  imageVariationUseCase,
   orthographyUseCase,
   prosConsStreamUseCase,
   prosConsUseCase,
@@ -49,5 +50,9 @@ export class OpenaiService {
 
   imageGeneration(imageGenerationParameters: ImageGenerationParameters) {
     return from(imageGenerationUseCase(imageGenerationParameters));
+  }
+
+  imageVariation(imageUrl: string) {
+    return from(imageVariationUseCase({ imageUrl }));
   }
 }
