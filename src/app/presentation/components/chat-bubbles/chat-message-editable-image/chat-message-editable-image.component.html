@@ -21,13 +21,15 @@
           <!--          tabindex="0"-->
           <!--          aria-label="Editable image"-->
           <!--        />-->
-        <!-- keydown for accessibility -->
+          <!-- keydown for accessibility -->
         <canvas
           #canvas
           width="512"
           height="512"
-          (click)="handleSelectedImage()"
-          (keydown.enter)="handleSelectedImage()"
+          (mousedown)="onMouseDown($event)"
+          (mouseup)="onMouseUp()"
+          (mousemove)="onMouseMove($event)"
+
           aria-label="Editable image"
         ></canvas>
       }
