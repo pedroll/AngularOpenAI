@@ -9,19 +9,27 @@
       <markdown>{{ text }}</markdown>
 
       @if (imageInfo) {
-        <img
-          [src]="imageInfo.url"
-          [alt]="text"
-          class="w-96 h-96 rounded-lg object-cover"
-          width="1024"
-          height="1024"
+        <!--        <img-->
+          <!--          [src]="imageInfo.url"-->
+          <!--          [alt]="text"-->
+          <!--          class="w-96 h-96 rounded-lg object-cover"-->
+          <!--          width="1024"-->
+          <!--          height="1024"-->
+          <!--          (click)="handleSelectedImage()"-->
+          <!--          (keydown.enter)="handleSelectedImage()"-->
+          <!--          priority-->
+          <!--          tabindex="0"-->
+          <!--          aria-label="Editable image"-->
+          <!--        />-->
+        <!-- keydown for accessibility -->
+        <canvas
+          #canvas
+          width="512"
+          height="512"
           (click)="handleSelectedImage()"
           (keydown.enter)="handleSelectedImage()"
-          priority
-          tabindex="0"
           aria-label="Editable image"
-        />
-        <!-- keydown for accessibility -->
+        ></canvas>
       }
     </div>
 
