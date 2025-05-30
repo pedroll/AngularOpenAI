@@ -3,13 +3,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import {
   ChatMessageComponent,
+  ChatMessageEditableImageComponent,
   TextMessageBoxComponent,
   TypingLoaderComponent,
   UserMessageComponent,
 } from '@components/index';
 import { OpenaiService } from '../../services/openai.service';
 import { Message } from '@interfaces/message.interface';
-import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-image-tunning-page',
@@ -20,14 +20,25 @@ import { NgOptimizedImage } from '@angular/common';
     UserMessageComponent,
     TextMessageBoxComponent,
     TypingLoaderComponent,
-    NgOptimizedImage,
+    ChatMessageEditableImageComponent,
   ],
   templateUrl: './image-tunning-page.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageTunningPageComponent {
-  public messages = signal<Message[]>([]);
+  public messages = signal<Message[]>([
+    // for testing purposes
+    {
+      isGpt: true,
+      text: 'Dummy Image',
+      imageInfo: {
+        ok: true,
+        url: 'http://localhost:3000/api/v1/gpt/image-generation/1747907364478',
+        alt: 'Dummy Image',
+      },
+    },
+  ]);
   public isLoading = signal(false);
   public originalImage = signal<string | undefined>('');
   public openaiService = inject(OpenaiService);
@@ -55,4 +66,10 @@ export class ImageTunningPageComponent {
   //   console.log({ prompt, selectedOption });
   // }
   generateVariation(): void {}
+
+  handleImageChange(newimage: string, originalImage: string): void {
+    this.originalImage.set(originalImage);
+    // todo: mask
+    console.log({ newimage, imageUrl: originalImage });
+  }
 }

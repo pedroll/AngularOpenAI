@@ -1,6 +1,7 @@
 export * from './chat-bubbles/chat-message/chat-message.component';
 export * from './chat-bubbles/chat-message-orthography/chat-message-orthography.component';
 export * from './chat-bubbles/user-message/user-message.component';
+export * from './chat-bubbles/chat-message-editable-image/chat-message-editable-image.component';
 
 export * from './sidebar-menu-item/sidebar-menu-item.component';
 

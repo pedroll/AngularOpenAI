@@ -2,7 +2,7 @@
   <div class="fixed flex flex-col items-center top-10 right-10 z-10 fade-in">
     <span>Editing</span>
     <img
-      [ngSrc]="originalImage()!"
+      [src]="originalImage()!"
       alt="Original image"
       class="border rounded-xl w-36 h-36 object-contain" />
     <button
@@ -24,6 +24,10 @@
       @for (message of messages(); track $index) {
 
         @if (message.isGpt) {
+          <app-chat-message-editable-image
+            [text]="message.text"
+            [imageInfo]="message.imageInfo!"
+            (selectedImage)="handleImageChange($event, message.imageInfo!.url)" />
           <app-chat-message [text]="message.text" [imageInfo]="message.imageInfo" />
         } @else {
           <app-user-message [text]="message.text" />
