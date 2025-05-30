@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "AngularGpt": {
+    "AngularOpenAI": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "AngularGpt:build:production"
+              "buildTarget": "AngularOpenAI:build:production"
             },
             "development": {
-              "buildTarget": "AngularGpt:build:development"
+              "buildTarget": "AngularOpenAI:build:development"
             }
           },
           "defaultConfiguration": "development"
