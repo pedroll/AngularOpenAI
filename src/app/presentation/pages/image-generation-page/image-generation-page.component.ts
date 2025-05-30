@@ -8,6 +8,7 @@ import {
 import { Message } from '@interfaces/message.interface';
 import { OpenaiService } from '../../services/openai.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ImageInfo } from '@interfaces/image-generation-response.interface';
 
 @Component({
   selector: 'app-image-generation-page',
@@ -31,23 +32,18 @@ export class ImageGenerationPageComponent {
   handleMessage(prompt: string): void {
     console.log(prompt);
     this.isLoading.set(true);
-    this.messages.update(messages => [...messages, { text: prompt, isGpt: false }]);
+    this.messages.update(messages => [
+      ...messages,
+      { text: prompt, isGpt: false, imageInfo: undefined },
+    ]);
 
     this.openaiService.imageGeneration({ prompt }).subscribe(response => {
       this.isLoading.set(false);
       this.messages.update(messages => [
         ...messages,
-        { text: response!.alt, isGpt: true, imageInfo: response },
+        { text: response!.alt ?? '', isGpt: true, imageInfo: response as ImageInfo },
       ]);
       console.log(response);
     });
   }
-
-  // handleMessageWithFile({ prompt, file }: TextMessageFileEvent): void {
-  //   console.log({ prompt, file });
-  // }
-  //
-  // handleMessageWithSelect({ prompt, selectedOption }: TextMessageSelectEvent): void {
-  //   console.log({ prompt, selectedOption });
-  // }
 }

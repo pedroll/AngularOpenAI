@@ -12,7 +12,7 @@ import {
 
 import { MarkdownComponent } from 'ngx-markdown';
 
-import { ImageGeneratedInfo } from '@interfaces/index';
+import { ImageInfo } from '@interfaces/index';
 
 @Component({
   selector: 'app-chat-message-editable-image',
@@ -23,7 +23,7 @@ import { ImageGeneratedInfo } from '@interfaces/index';
 })
 export class ChatMessageEditableImageComponent implements AfterViewInit {
   @Input({ required: true }) text!: string;
-  @Input({ required: true }) imageInfo!: ImageGeneratedInfo;
+  @Input({ required: true }) imageInfo!: ImageInfo;
 
   @Output() selectedImage = new EventEmitter<string>();
 
@@ -41,7 +41,7 @@ export class ChatMessageEditableImageComponent implements AfterViewInit {
     const context = canvas.getContext('2d');
 
     const image = new Image();
-    image.src = this.imageInfo.url;
+    image.src = this.imageInfo.url!;
     image.crossOrigin = 'Anonymous';
 
     this.originalImage.set(image);
@@ -90,6 +90,7 @@ export class ChatMessageEditableImageComponent implements AfterViewInit {
     const canvas = this.canvas.nativeElement;
     const url = canvas.toDataURL('image/png'); // b64
     this.selectedImage.emit(url);
+    console.log(url);
   }
 
   handleSelectedImage() {

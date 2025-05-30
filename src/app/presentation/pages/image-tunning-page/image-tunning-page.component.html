@@ -28,7 +28,7 @@
           <app-chat-message-editable-image
             [text]="message.text"
             [imageInfo]="message.imageInfo!"
-            (selectedImage)="handleImageChange($event, message.imageInfo!.url)" />
+            (selectedImage)="handleImageChange($event, message.imageInfo!.url!)" />
         } @else {
           <app-user-message [text]="message.text" />
         }
