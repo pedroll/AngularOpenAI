@@ -1,6 +1,39 @@
-# AngularGpt
+# AngularOpenAiLL
+-----------------
+
+- Playground for OpenAi endpoints consumed with [Test NestJs Backend](https://github.com/pedroll/nestjs-backend-v2)
+- Styled with TailwindCSS
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.10.
+
+## Roadmap
+
+* [ ] Ai selector:
+  * [ ] Provider selector
+  * [ ] Model selector
+* [x] OpenAI feaute tets
+  * [x] Orthography checker
+  * [x] Pros/Cons comparative
+  * [x] Streamed response
+  * [x] Translate
+  * [x] Speech to text
+  * [x] Text to speech
+  * [x] Image generation
+  * [x] Image edition with mask
+  * [x] Image variation
+  * [ ] Assistant
+* [x] EsLint v9
+  * [x] @eslint/js
+  * [x] typescript-eslint
+  * [x] angular-eslint
+  * [x] eslint-plugin-prettier
+  * [x] @ngrx/eslint-plugin
+  * [x] eslint-plugin-jsdoc
+  * [x] eslint-plugin-sonarjs
+  * [x] eslint-plugin-jest
+  * [x] eslint-plugin-unicorn
+* [ ] axe-core dev-tools (accessibility)
+* [ ] pa11y app (accessibility)
 
 ## Development server
 
