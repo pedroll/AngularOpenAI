@@ -17,6 +17,7 @@ import {
   TranslateResponse,
 } from '@interfaces/index';
 import { createThreadUseCase } from '@use-cases/assistant/create-thread.use-case';
+import { postQuestionUseCase } from '@use-cases/assistant/post-question.use-case';
 
 @Injectable({
   providedIn: 'root',
@@ -63,5 +64,9 @@ export class OpenaiService {
     return from(createThreadUseCase()).pipe(
       tap(threadId => localStorage.setItem('threadId', threadId))
     );
+  }
+
+  postQuestion(threadId: string, question: string) {
+    return from(postQuestionUseCase(threadId, question));
   }
 }

@@ -4,7 +4,7 @@
     <div class="grid gap-y-1">
 
       <!--      chat messages.   -->
-      <app-chat-message text="Write tour text to revieew" />
+      <app-chat-message text="Helo, Im Sam. Whats your name? and, How can I help you today?" />
       @for (message of messages(); track message.isGpt) {
         @if (message.isGpt) {
           <app-chat-message [text]="message.text" />
@@ -24,16 +24,5 @@
     placeHolder="Escribe tu mensaje"
     (messageBox)="handleMessage($event)"
   />
-
-  <!--  <app-text-message-box-file-->
-  <!--    placeHolder="Escribe tu mensaje"-->
-  <!--    (selectedTheOption)="handleMessageWithFile($event)"-->
-  <!--  />-->
-
-  <!--  <app-text-message-box-select-->
-  <!--    (selectedTheOption)="handleMessageWithSelect($event)"-->
-  <!--    [options]="[{id: 'UNO', text: '1'},{id: 'DOS', text: '2'}]"-->
-  <!--    placeHolder="Escribe tu mensaje"-->
-  <!--  />-->
 
 </div>

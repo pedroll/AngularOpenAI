@@ -39,20 +39,17 @@ export class AssistantPageComponent implements OnInit {
     this.isLoading.set(true);
     this.messages.update(messages => [...messages, { text: question, isGpt: false }]);
 
-    this.openaiService.checkOrthography(question).subscribe(response => {
+    this.openaiService.postQuestion(this.threadId(), question).subscribe(replies => {
       this.isLoading.set(false);
-      this.messages.update(messages => [
-        ...messages,
-        { text: response.message, isGpt: true, info: response },
-      ]);
+
+      for (const reply of replies) {
+        for (const message of reply.content) {
+          this.messages.update(messages => [
+            ...messages,
+            { text: message, isGpt: reply.role === 'assistant' },
+          ]);
+        }
+      }
     });
   }
-
-  // handleMessageWithFile({ question, file }: TextMessageFileEvent): void {
-  //   console.log({ question, file });
-  // }
-  //
-  // handleMessageWithSelect({ question, selectedOption }: TextMessageSelectEvent): void {
-  //   console.log({ question, selectedOption });
-  // }
 }
