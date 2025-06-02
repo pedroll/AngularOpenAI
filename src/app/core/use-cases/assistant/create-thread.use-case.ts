@@ -2,6 +2,7 @@ import { environment } from '../../../../environments/environment';
 
 export const createThreadUseCase = async () => {
   try {
+    console.log(`${environment.assistantBackendApi}/create-thread`);
     const response = await fetch(`${environment.assistantBackendApi}/create-thread`, {
       method: 'POST',
     });

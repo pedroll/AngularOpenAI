@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import {
   ChatMessageComponent,
   TextMessageBoxComponent,
@@ -21,17 +21,25 @@ import { ReactiveFormsModule } from '@angular/forms';
   templateUrl: './assistant-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AssistantPageComponent {
-  public messages = signal<Message[]>([]);
-  public isLoading = signal(false);
+export class AssistantPageComponent implements OnInit {
   public openaiService = inject(OpenaiService);
 
-  handleMessage(prompt: string): void {
-    console.log(prompt);
-    this.isLoading.set(true);
-    this.messages.update(messages => [...messages, { text: prompt, isGpt: false }]);
+  public messages = signal<Message[]>([]);
+  public isLoading = signal(false);
+  public threadId = signal<string>('');
 
-    this.openaiService.checkOrthography(prompt).subscribe(response => {
+  ngOnInit(): void {
+    this.openaiService.createThread().subscribe(threadId => {
+      this.threadId.set(threadId as string);
+    });
+  }
+
+  handleMessage(question: string): void {
+    console.log(question);
+    this.isLoading.set(true);
+    this.messages.update(messages => [...messages, { text: question, isGpt: false }]);
+
+    this.openaiService.checkOrthography(question).subscribe(response => {
       this.isLoading.set(false);
       this.messages.update(messages => [
         ...messages,
@@ -40,11 +48,11 @@ export class AssistantPageComponent {
     });
   }
 
-  // handleMessageWithFile({ prompt, file }: TextMessageFileEvent): void {
-  //   console.log({ prompt, file });
+  // handleMessageWithFile({ question, file }: TextMessageFileEvent): void {
+  //   console.log({ question, file });
   // }
   //
-  // handleMessageWithSelect({ prompt, selectedOption }: TextMessageSelectEvent): void {
-  //   console.log({ prompt, selectedOption });
+  // handleMessageWithSelect({ question, selectedOption }: TextMessageSelectEvent): void {
+  //   console.log({ question, selectedOption });
   // }
 }
