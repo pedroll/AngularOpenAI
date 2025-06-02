@@ -21,7 +21,7 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
   * [x] Image generation
   * [x] Image edition with mask
   * [x] Image variation
-  * [ ] Assistant
+  * [x] Assistant
 * [x] EsLint v9
   * [x] @eslint/js
   * [x] typescript-eslint
